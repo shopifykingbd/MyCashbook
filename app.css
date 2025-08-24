@@ -1,0 +1,572 @@
+body {
+    background: linear-gradient(135deg, #eef2ff 0%, #ffe4ef 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 24px #0001;
+    padding: 32px;
+    margin-top: 24px;
+    margin-bottom: 32px;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+@media (min-width: 768px) {
+    header {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #4338ca;
+    margin-bottom: 0;
+    letter-spacing: -1px;
+    text-shadow: 0 2px 8px #0001;
+}
+
+.year-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+label {
+    font-weight: 600;
+    color: #374151;
+}
+
+select,
+input[type="date"],
+input[type="text"],
+input[type="number"] {
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 8px 16px;
+    outline: none;
+    background: #eef2ff;
+    font-weight: 500;
+    transition: border 0.2s;
+}
+
+select:focus,
+input:focus {
+    border-color: #6366f1;
+}
+
+button {
+    border: none;
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px #0001;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-indigo {
+    background: #6366f1;
+    color: #fff;
+}
+
+.btn-indigo:hover {
+    background: #4338ca;
+}
+
+.btn-green {
+    background: #22c55e;
+    color: #fff;
+}
+
+.btn-green:hover {
+    background: #15803d;
+}
+
+.btn-red {
+    background: #dc2626;
+    color: #fff;
+}
+
+.btn-red:hover {
+    background: #991b1b;
+}
+
+.btn-gray {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.btn-gray:hover {
+    background: #d1d5db;
+}
+
+/* Form grid */
+#transaction-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+@media (min-width: 768px) {
+    #transaction-form {
+        grid-template-columns: repeat(7, 1fr);
+    }
+}
+
+#transaction-form button[type="submit"] {
+    grid-column: 1 / -1;
+}
+
+@media (min-width: 768px) {
+    #transaction-form button[type="submit"] {
+        grid-column: 7;
+    }
+}
+
+/* Categories */
+.categories-section {
+    margin-bottom: 32px;
+}
+
+.category-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.category-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #eef2ff;
+    color: #4338ca;
+    border-radius: 999px;
+    padding: 8px 18px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #0001;
+    transition: background 0.2s;
+}
+
+.category-chip:hover {
+    background: #c7d2fe;
+}
+
+.category-chip button {
+    background: none;
+    box-shadow: none;
+    padding: 0 4px;
+    font-size: 1rem;
+}
+
+.category-chip .text-red-600 {
+    color: #dc2626;
+}
+
+.category-chip .text-indigo-600 {
+    color: #6366f1;
+}
+
+/* Filters */
+.filters-section {
+    margin-bottom: 32px;
+}
+
+.filters-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px;
+}
+
+/* Summary Cards */
+#summary-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+@media (min-width: 768px) {
+    #summary-cards {
+        flex-direction: row;
+    }
+}
+
+.summary-card {
+    flex: 1;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 8px #0001;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.summary-balance {
+    background: #111;
+    color: #fff;
+}
+
+.summary-income {
+    background: #2563eb;
+    color: #fff;
+}
+
+.summary-expense {
+    background: #dc2626;
+    color: #fff;
+}
+
+.summary-card span {
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.summary-card .summary-value {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+/* Transactions */
+.transactions-section {
+    margin-bottom: 0;
+}
+
+.transactions-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.transactions-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.table-container {
+    overflow-x: auto;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px #0001;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #d1d5db;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+}
+
+thead {
+    background: #eef2ff;
+    color: #4338ca;
+    font-weight: 600;
+}
+
+th,
+td {
+    padding: 16px;
+    border: 1px solid #d1d5db;
+    white-space: nowrap;
+}
+
+tbody tr:nth-child(even) {
+    background: #eef2ff;
+}
+
+.text-blue-700 {
+    color: #2563eb;
+    font-weight: bold;
+}
+
+.text-red-600 {
+    color: #dc2626;
+    font-weight: bold;
+}
+
+/* PDF summary styles (already custom in JS) */
+/* Custom scrollbar for better UX */
+::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+    background: #eef2ff;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #6366f1;
+    border-radius: 8px;
+}
+
+/* Print styles for PDF export */
+@media print {
+
+    .transactions-actions,
+    .transactions-actions * {
+        display: none !important;
+        visibility: hidden !important;
+    }
+}
+
+/* Print styles for PDF export */
+@media print {
+    body * {
+        visibility: hidden !important;
+    }
+
+    #summary-cards,
+    #summary-cards *,
+    #pdf-export-area,
+    #pdf-export-area *,
+    .transactions-header,
+    .transactions-header *,
+    .table-container,
+    .table-container *,
+    #transactions-tbody,
+    #transactions-tbody * {
+        visibility: visible !important;
+    }
+
+    /* Hide header, year controls, category button, transaction buttons, filters in print */
+    header,
+    .year-controls,
+    #open-category-drawer,
+    #transaction-buttons,
+    .filters-section {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    /* Hide action buttons in print */
+    .transactions-actions,
+    .transactions-actions * {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    #summary-cards {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: center !important;
+        gap: 32px !important;
+        position: static !important;
+        width: 100vw;
+        margin-bottom: 32px !important;
+        background: none !important;
+        box-shadow: none !important;
+        z-index: 9999;
+        page-break-after: avoid;
+    }
+
+    .transactions-header {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        position: static !important;
+        width: 100vw;
+        background: none !important;
+        box-shadow: none !important;
+        z-index: 9998;
+        font-size: 2rem !important;
+        color: #4338ca !important;
+        font-weight: bold !important;
+        margin-bottom: 24px !important;
+        margin-top: 24px !important;
+        padding: 0 16px !important;
+    }
+
+    .transactions-header h2 {
+        margin: 0 !important;
+        font-size: 2rem !important;
+        color: #4338ca !important;
+        font-weight: bold !important;
+    }
+
+    #filter-summary {
+        font-size: 1.3rem !important;
+        color: #dc2626 !important;
+        font-weight: 600 !important;
+        margin: 0 !important;
+        padding-left: 16px !important;
+    }
+
+    .transactions-actions {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    .table-container {
+        position: static !important;
+        width: 100vw;
+        background: none !important;
+        box-shadow: none !important;
+        z-index: 9997;
+        margin-top: 0 !important;
+    }
+}
+
+/* Drawer Sidebar Styles */
+.drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: #0005;
+    z-index: 1000;
+    transition: opacity 0.3s;
+}
+
+.drawer-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 340px;
+    max-width: 100vw;
+    height: 100vh;
+    background: #fff;
+    box-shadow: -2px 0 16px #0002;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    animation: drawer-slide-in 0.3s;
+    transition: transform 0.3s;
+    padding-inline: 1.5rem;
+}
+
+.drawer-close-btn {
+    align-self: flex-end;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: #4338ca;
+    margin: 16px 16px 0 0;
+    cursor: pointer;
+}
+
+@keyframes drawer-slide-in {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+.drawer-sidebar.hide {
+    transform: translateX(100%);
+    transition: transform 0.3s;
+}
+
+/* Hide scroll on body when drawer open */
+body.drawer-open {
+    overflow: hidden;
+}
+
+/* ...existing code... */
+
+/* Custom date input style for drawer */
+#drawer-date {
+    background: #f8fafc;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    padding: 12px 44px 12px 16px;
+    cursor: pointer;
+    transition: border 0.2s;
+}
+
+#drawer-date:focus {
+    border-color: #6366f1;
+    background: #eef2ff;
+}
+
+/* Responsive Table */
+.table-container {
+    overflow-x: auto;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px #0001;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #d1d5db;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    min-width: 700px;
+}
+
+@media (max-width: 900px) {
+    table {
+        min-width: 600px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+    }
+
+    thead tr {
+        display: none;
+    }
+
+    tr {
+        margin-bottom: 16px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px #0001;
+        padding: 12px;
+    }
+
+    td {
+        position: relative;
+        padding-left: 50%;
+        border: none;
+        text-align: left;
+        min-height: 32px;
+    }
+
+    td:before {
+        position: absolute;
+        left: 16px;
+        top: 12px;
+        width: 45%;
+        white-space: nowrap;
+        font-weight: bold;
+        color: #6366f1;
+        content: attr(data-label);
+    }
+}
