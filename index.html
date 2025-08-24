@@ -8,103 +8,137 @@
     <link rel="stylesheet" href="app.css" />
   </head>
   <body>
-    <div class="container">
-      <header>
-        <h1>Personal Cashbook</h1>
-        <div class="year-controls">
-          <label for="year-select">Year:</label>
-          <select id="year-select"></select>
-          <button id="new-year" class="btn-indigo">Add Year</button>
-        </div>
-        <button id="open-category-drawer" class="btn-indigo" style="margin-left: 12px">Categories</button>
-        <!-- In your header, replace the login button with this -->
-        <button id="loginBtn" class="btn-indigo">Sign in with Google</button>
-        <div id="user-info" style="display: none; align-items: center; gap: 12px">
-          <img id="user-pic" style="width: 32px; height: 32px; border-radius: 50%" referrerpolicy="no-referrer" />
-          <span id="user-name"></span>
-          <button id="logoutBtn" class="btn-gray" style="margin-left: 8px">Sign Out</button>
-        </div>
-      </header>
-
-      <div id="transaction-buttons" style="display: flex; gap: 16px; margin-bottom: 32px">
-        <button
-          id="open-income-drawer"
-          style="background: #01865f; color: #fff; font-weight: 700; border-radius: 8px; padding: 12px 32px; font-size: 1.1rem"
-        >
-          Add Income
-        </button>
-        <button
-          id="open-expense-drawer"
-          style="background: #c93b3b; color: #fff; font-weight: 700; border-radius: 8px; padding: 12px 32px; font-size: 1.1rem"
-        >
-          Add Expense
-        </button>
+    <div
+      id="loading-indicator"
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100vw;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 99999;
+        background: rgba(255, 255, 255, 0.8);
+      "
+    >
+      <span style="font-size: 1.5rem; color: #6366f1">Loading...</span>
+    </div>
+    <!-- Move login and user info outside main-app -->
+    <header
+      style="
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        max-width: 900px;
+        margin: 24px auto 0 auto;
+        background: none;
+        box-shadow: none;
+      "
+    >
+      <button id="loginBtn" class="btn-indigo">Sign in with Google</button>
+      <div id="user-info" style="display: none; align-items: center; gap: 12px">
+        <img id="user-pic" style="width: 32px; height: 32px; border-radius: 50%" referrerpolicy="no-referrer" />
+        <span id="user-name"></span>
+        <button id="logoutBtn" class="btn-gray" style="margin-left: 8px">Sign Out</button>
       </div>
+    </header>
 
-      <!-- Summary Cards -->
-      <div id="summary-cards">
-        <div class="summary-card summary-balance">
-          <span>Balance</span>
-          <span id="balance" class="summary-value">৳0.00</span>
-        </div>
-        <div class="summary-card summary-income">
-          <span>Total Income</span>
-          <span id="total-income" class="summary-value">৳0.00</span>
-        </div>
-        <div class="summary-card summary-expense">
-          <span>Total Expense</span>
-          <span id="total-expense" class="summary-value">৳0.00</span>
-        </div>
-      </div>
-
-      <!-- Filters Section -->
-      <section class="filters-section">
-        <h2 style="font-size: 1.5rem; font-weight: 700; color: #4338ca; margin-bottom: 16px">Filters</h2>
-        <div class="filters-row">
-          <div>
-            <label for="month-filter" style="display: block; margin-bottom: 8px">Month:</label>
-            <select id="month-filter"></select>
+    <div id="main-app" style="display: none">
+      <div class="container">
+        <header>
+          <h1>Personal Cashbook</h1>
+          <div class="year-controls">
+            <label for="year-select">Year:</label>
+            <select id="year-select"></select>
+            <button id="new-year" class="btn-indigo">Add Year</button>
           </div>
-          <div>
-            <label for="category-filter" style="display: block; margin-bottom: 8px">Category:</label>
-            <select id="category-filter">
-              <option value="">All</option>
-            </select>
-          </div>
-          <button id="clear-filters" class="btn-gray" style="align-self: flex-end">Clear Filters</button>
-        </div>
-      </section>
+          <button id="open-category-drawer" class="btn-indigo" style="margin-left: 12px">Categories</button>
+        </header>
 
-      <!-- Transactions Section -->
-      <section class="transactions-section">
-        <div class="table-container">
-          <div id="pdf-export-area">
-            <div class="transactions-header">
-              <h2 style="font-size: 1.5rem; font-weight: 700; color: #4338ca">Transactions</h2>
-              <span id="filter-summary"></span>
-              <div class="transactions-actions">
-                <button id="delete-all" class="btn-red">Delete All</button>
-                <button id="export-pdf" class="btn-indigo">Export PDF</button>
-              </div>
+        <div id="transaction-buttons" style="display: flex; gap: 16px; margin-bottom: 32px">
+          <button
+            id="open-income-drawer"
+            style="background: #01865f; color: #fff; font-weight: 700; border-radius: 8px; padding: 12px 32px; font-size: 1.1rem"
+          >
+            Add Income
+          </button>
+          <button
+            id="open-expense-drawer"
+            style="background: #c93b3b; color: #fff; font-weight: 700; border-radius: 8px; padding: 12px 32px; font-size: 1.1rem"
+          >
+            Add Expense
+          </button>
+        </div>
+
+        <!-- Summary Cards -->
+        <div id="summary-cards">
+          <div class="summary-card summary-balance">
+            <span>Balance</span>
+            <span id="balance" class="summary-value">৳0.00</span>
+          </div>
+          <div class="summary-card summary-income">
+            <span>Total Income</span>
+            <span id="total-income" class="summary-value">৳0.00</span>
+          </div>
+          <div class="summary-card summary-expense">
+            <span>Total Expense</span>
+            <span id="total-expense" class="summary-value">৳0.00</span>
+          </div>
+        </div>
+
+        <!-- Filters Section -->
+        <section class="filters-section">
+          <h2 style="font-size: 1.5rem; font-weight: 700; color: #4338ca; margin-bottom: 16px">Filters</h2>
+          <div class="filters-row">
+            <div>
+              <label for="month-filter" style="display: block; margin-bottom: 8px">Month:</label>
+              <select id="month-filter"></select>
             </div>
-
-            <table>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Description</th>
-                  <th>Amount</th>
-                  <th>Type</th>
-                  <th>Category</th>
-                  <th>Month</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="transactions-tbody"></tbody>
-            </table>
+            <div>
+              <label for="category-filter" style="display: block; margin-bottom: 8px">Category:</label>
+              <select id="category-filter">
+                <option value="">All</option>
+              </select>
+            </div>
+            <button id="clear-filters" class="btn-gray" style="align-self: flex-end">Clear Filters</button>
           </div>
-        </div>
-      </section>
+        </section>
+
+        <!-- Transactions Section -->
+        <section class="transactions-section">
+          <div class="table-container">
+            <div id="pdf-export-area">
+              <div class="transactions-header">
+                <h2 style="font-size: 1.5rem; font-weight: 700; color: #4338ca">Transactions</h2>
+                <span id="filter-summary"></span>
+                <div class="transactions-actions">
+                  <button id="export-pdf" class="btn-indigo">Export PDF</button>
+                </div>
+              </div>
+
+              <table>
+                <thead>
+                  <tr>
+                    <th><input type="checkbox" id="select-all-txn" /></th>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Type</th>
+                    <th>Category</th>
+                    <th>Month</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="transactions-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
 
     <!-- Drawer Sidebar -->
@@ -216,6 +250,8 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
     <script type="module" src="app.js"></script>
   </body>
 </html>
